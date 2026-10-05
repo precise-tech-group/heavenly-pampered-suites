@@ -70,8 +70,6 @@
 
 html {
   scroll-behavior: smooth;
-  overflow-x: hidden;
-  width: 100%;
 }
 
 body {
@@ -83,7 +81,6 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  overflow-x: hidden;
 }
 
 img {
@@ -1163,7 +1160,7 @@ h2.section-title {
 }
 
 [data-reveal="left"] {
-  transform: translateX(-50px);
+  transform: translateX(clamp(-50px, -4vw, -14px));
 }
 
 [data-reveal="left"].is-visible {
@@ -1171,7 +1168,7 @@ h2.section-title {
 }
 
 [data-reveal="right"] {
-  transform: translateX(50px);
+  transform: translateX(clamp(14px, 4vw, 50px));
 }
 
 [data-reveal="right"].is-visible {
