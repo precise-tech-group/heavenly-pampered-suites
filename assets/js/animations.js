@@ -122,6 +122,7 @@
     var section = document.querySelector(".immersive");
     if (!section) return;
 
+    var sticky = section.querySelector(".immersive-sticky");
     var media = section.querySelector(".immersive-media");
     var img = section.querySelector(".immersive-media img");
     var text = section.querySelector(".immersive-text");
@@ -132,8 +133,9 @@
 
     function update() {
       var rect = section.getBoundingClientRect();
-      var total = rect.height - window.innerHeight;
-      var progress = total > 0 ? Math.min(Math.max(-rect.top / total, 0), 1) : 0;
+      var vh = window.innerHeight;
+      var pinWindow = rect.height - vh;
+      var progress = pinWindow > 0 ? Math.min(Math.max(-rect.top / pinWindow, 0), 1) : 0;
 
       var width = 86 + progress * 14;
       var height = 72 + progress * 28;
@@ -156,6 +158,25 @@
         var textProgress = Math.min(progress * 1.6, 1);
         text.style.opacity = String(1 - textProgress);
         text.style.transform = "translateY(" + textProgress * -40 + "px)";
+      }
+
+      // Once the pin window is spent, position: sticky forces a mandatory
+      // scroll-through equal to the sticky element's own height before the
+      // next section can appear (it slides away rather than being clipped).
+      // Left alone, that stretch renders as a static image sliding over
+      // blank page background. Fade + settle the pinned content out over
+      // that same distance so the scroll keeps animating instead of
+      // going dead.
+      var releaseDistance = vh;
+      var releaseProgress =
+        releaseDistance > 0
+          ? Math.min(Math.max((-rect.top - pinWindow) / releaseDistance, 0), 1)
+          : 0;
+      var fadeOut = Math.min(releaseProgress / 0.6, 1);
+
+      if (sticky) {
+        sticky.style.opacity = String(1 - fadeOut);
+        sticky.style.transform = "scale(" + (1 - fadeOut * 0.06) + ")";
       }
 
       ticking = false;

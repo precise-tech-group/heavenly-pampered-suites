@@ -771,7 +771,8 @@ h2.section-title {
 
 .intro-stats {
   display: flex;
-  gap: var(--space-lg);
+  flex-wrap: wrap;
+  gap: var(--space-md) var(--space-lg);
   margin-top: var(--space-lg);
   padding-top: var(--space-lg);
   border-top: 1px solid var(--color-border);
@@ -924,6 +925,7 @@ h2.section-title {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  will-change: opacity, transform;
 }
 
 .immersive-media {
@@ -1599,6 +1601,10 @@ h2.section-title {
   border-top: 1px solid var(--color-border-light);
 }
 
+.contact-method > div {
+  min-width: 0;
+}
+
 .contact-method:first-of-type {
   border-top: none;
 }
@@ -1623,6 +1629,7 @@ h2.section-title {
 .contact-method a,
 .contact-method span {
   font-size: 1.02rem;
+  overflow-wrap: anywhere;
 }
 
 .contact-method .label {
@@ -1827,9 +1834,14 @@ h2.section-title {
   }
 
   .immersive-text,
+  .immersive-sticky,
   .pro-card,
   .who-card img,
   .gallery-item img {
     transform: none !important;
+  }
+
+  .immersive-sticky {
+    opacity: 1 !important;
   }
 }

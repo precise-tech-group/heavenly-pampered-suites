@@ -206,11 +206,6 @@
     grid-template-columns: 1fr;
   }
 
-  .intro-stats {
-    gap: var(--space-md);
-    flex-wrap: wrap;
-  }
-
   .intro-stats div strong {
     font-size: 1.6rem;
   }
@@ -281,9 +276,9 @@
   }
 
   .intro-media .img-detail {
-    width: 55%;
-    right: -6%;
-    bottom: -10%;
+    width: 52%;
+    right: 0;
+    bottom: -8%;
   }
 
   .pro-grid {
